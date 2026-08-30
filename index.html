@@ -390,7 +390,9 @@
 <body>
 
     <!-- Hidden Audio Player -->
-    <audio id="bg-music" src="./music.mp3" loop preload="auto"></audio>
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="container" id="main-container">
         <!-- STEP 1: LOGIN -->
@@ -586,24 +588,27 @@
 
         function openFinalCard(card) {
             card.classList.add('flipped');
-            
+
             const music = document.getElementById("bg-music");
 
             music.volume = 0.8;
             music.currentTime = 0;
 
-            music.play().then(() => {
-                console.log("Music started!");
-            }).catch(error => {
-                console.log("Music error:", error);
-            });
+            music.play()
+                .then(() => {
+                    console.log("Music started!");
+                })
+                .catch(error => {
+                    console.log("Music error:", error);
+                });
 
             document.getElementById("main-container").style.opacity = "0";
 
             createUniverse();
+
             const finalScreen = document.getElementById("final-screen");
             finalScreen.classList.add("active");
-            
+
             setTimeout(() => {
                 document.getElementById("main-container").style.display = "none";
             }, 1000);
